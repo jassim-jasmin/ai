@@ -81,8 +81,6 @@ def featureNames(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityF
 
     substringList = getSubstringsFromFile(deedFiles, substringList)
 
-    print(substringList, "the list", len(substringList))
-
     open(subStringPriorityFilePath, 'w').write(json.dumps(substringList))
     return substringList
 
@@ -136,9 +134,7 @@ def buildFullTrainingModel(trainingPathList, featureNames, targetNames):
 
 def buildClassifier(trainingModelPath, classifierPath):
     trainingModel = json.loads(open(trainingModelPath, 'r').read())
-    print(trainingModel, 'trainingModel')
     df = pd.DataFrame(trainingModel['data'], columns=trainingModel['feature_names'])
-    print(trainingModel['target'], trainingModel['target_names'])
     df['target_names'] = pd.Categorical.from_codes(trainingModel['target'], trainingModel['target_names'])
     features = df.columns[:4]
     y = pd.factorize(df['target_names'])[0]
@@ -153,10 +149,18 @@ def predict(testModel, classifierPath):
     # print(testModel['target'], testModel['target_names'])  #
     df['target_names'] = pd.Categorical.from_codes(testModel['target'], testModel['target_names'])
     features = df.columns[:4]
-    preds = np.array(df['target_names'])[classifier.predict(df[features])]
-    # print(preds, 'the prediction')
+    pre = classifier.predict(df[features])
+    preds = np.array(df['target_names'])[pre]
+    print(df['target_names'])
+    print(preds, 'the prediction')
     print(classifier.predict(df[features]))
 
+def setTestData(firstTrainingSetPath, secondTrainingSetPath, feature_names, targetNames, testModelFirstPath, testModelSecondPath):
+    testModelMortgage = buildFullTrainingModel([firstTrainingSetPath], feature_names, targetNames)  #
+    open(testModelFirstPath, 'w').write(json.dumps(testModelMortgage))  #
+
+    testModelDeed = buildFullTrainingModel([secondTrainingSetPath], feature_names, targetNames)
+    open(testModelSecondPath, 'w').write(json.dumps(testModelDeed))  #
 
 def setDataModel(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityFilePath, trainingModelPath,
                  classifierPath, testModelFirstPath, testModelSecondPath, feature_names):
@@ -167,12 +171,8 @@ def setDataModel(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityF
     open(trainingModelPath, 'w').write(json.dumps(trainingModel))  #
     buildClassifier(trainingModelPath, classifierPath)  #
 
-    testModelMortgage = buildFullTrainingModel([firstTrainingSetPath], feature_names, targetNames)  #
-    open(testModelFirstPath, 'w').write(json.dumps(testModelMortgage))  #
-
-    testModelDeed = buildFullTrainingModel([secondTrainingSetPath], feature_names, targetNames)
-    open(testModelSecondPath, 'w').write(json.dumps(testModelDeed))  #
-
+    setTestData(firstTrainingSetPath, secondTrainingSetPath, feature_names, targetNames, testModelFirstPath,
+                testModelSecondPath)
 
 start = timeit.default_timer()
 
@@ -184,10 +184,10 @@ classifierPath = '/root/Documents/mj/python/model/classifier.sav'
 testModelFirstPath = '/root/Documents/mj/python/model/testModelMortgage.txt'
 testModelSecondPath = '/root/Documents/mj/python/model/testModelDeed.txt'
 
-feature_names = json.loads(open(subStringPriorityFilePath, 'r').read())
+# feature_names = json.loads(open(subStringPriorityFilePath, 'r').read())
 
-setDataModel(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityFilePath, trainingModelPath,
-classifierPath, testModelFirstPath, testModelSecondPath, feature_names)
+# setDataModel(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityFilePath, trainingModelPath,
+# classifierPath, testModelFirstPath, testModelSecondPath, feature_names)
 
 
 testModel = json.loads(open(testModelFirstPath,'r').read())

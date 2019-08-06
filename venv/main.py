@@ -151,8 +151,8 @@ def predict(testModel, classifierPath):
     features = df.columns[:4]
     pre = classifier.predict(df[features])
     preds = np.array(df['target_names'])[pre]
-    print(df['target_names'])
-    print(preds, 'the prediction')
+    # print(df['target_names'])
+    # print(preds, 'the prediction')
     print(classifier.predict(df[features]))
 
 def setTestData(firstTrainingSetPath, secondTrainingSetPath, feature_names, targetNames, testModelFirstPath, testModelSecondPath):
@@ -189,10 +189,11 @@ testModelSecondPath = '/root/Documents/mj/python/model/testModelDeed.txt'
 # setDataModel(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityFilePath, trainingModelPath,
 # classifierPath, testModelFirstPath, testModelSecondPath, feature_names)
 
-
+print('mortgage')
 testModel = json.loads(open(testModelFirstPath,'r').read())
 predict(testModel,classifierPath)
 
+print('deed')
 testModel = json.loads(open(testModelSecondPath,'r').read())
 predict(testModel,classifierPath)
 

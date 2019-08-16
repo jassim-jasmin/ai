@@ -97,6 +97,12 @@ def buildTrainingModel(trainingSetDirectoryPath, featureNames, targetNumber, dat
             for featureName in featureNames:
                 data.append(fuzz.token_set_ratio(fileRead, featureName))
 
+            if 'fileName' in dataDic:
+                dataDic['fileName'].append(eachFiles)
+            else:
+                dataDic['fileName'] = []
+                dataDic['fileName'].append(eachFiles)
+
             if 'data' in dataDic:
                 dataDic['data'].append(data)
             else:
@@ -146,14 +152,18 @@ def buildClassifier(trainingModelPath, classifierPath):
 def predict(testModel, classifierPath):
     classifier = pickle.load(open(classifierPath, 'rb'))
     df = pd.DataFrame(testModel['data'], columns=testModel['feature_names'])
+
     # print(testModel['target'], testModel['target_names'])  #
     df['target_names'] = pd.Categorical.from_codes(testModel['target'], testModel['target_names'])
     features = df.columns[:4]
+    df.to_csv('/root/Documents/mj/python/model/testModel.csv')
     pre = classifier.predict(df[features])
-    preds = np.array(df['target_names'])[pre]
+    # np.savetxt('/root/Documents/mj/python/model/pedicted.csv', pre, delimiter=",")
+    preds = np.array(df['target_names'])[classifier.predict(df[features])]
+    print(df['target_names'],pre,preds)
     # print(df['target_names'])
     # print(preds, 'the prediction')
-    print(classifier.predict(df[features]))
+    # print(classifier.predict(df[features]))
 
 def setTestData(firstTrainingSetPath, secondTrainingSetPath, feature_names, targetNames, testModelFirstPath, testModelSecondPath):
     testModelMortgage = buildFullTrainingModel([firstTrainingSetPath], feature_names, targetNames)  #
@@ -184,18 +194,27 @@ classifierPath = '/root/Documents/mj/python/model/classifier.sav'
 testModelFirstPath = '/root/Documents/mj/python/model/testModelMortgage.txt'
 testModelSecondPath = '/root/Documents/mj/python/model/testModelDeed.txt'
 
-# feature_names = json.loads(open(subStringPriorityFilePath, 'r').read())
+feature_names = json.loads(open(subStringPriorityFilePath, 'r').read())
 
 # setDataModel(firstTrainingSetPath, secondTrainingSetPath, subStringPriorityFilePath, trainingModelPath,
 # classifierPath, testModelFirstPath, testModelSecondPath, feature_names)
 
-print('mortgage')
-testModel = json.loads(open(testModelFirstPath,'r').read())
-predict(testModel,classifierPath)
+# setTestData(firstTrainingSetPath, secondTrainingSetPath, feature_names, ['mortgage', 'deed'],testModelFirstPath, testModelSecondPath)
 
-print('deed')
-testModel = json.loads(open(testModelSecondPath,'r').read())
-predict(testModel,classifierPath)
+# print('mortgage')
+# testModel = json.loads(open(testModelFirstPath,'r').read())
+# predict(testModel,classifierPath)
+
+trainingModel = json.loads(open(trainingModelPath, 'r').read())
+df = pd.DataFrame(trainingModel['data'], columns=trainingModel['feature_names'])
+df['target_names'] = pd.Categorical.from_codes(trainingModel['target'], trainingModel['target_names'])
+df.to_csv('/root/Documents/mj/python/model/trainingModel.csv')
+print(df)
+
+# print('deed')
+# testModel = json.loads(open(testModelSecondPath,'r').read())
+# predict(testModel,classifierPath)
+
 
 stop = timeit.default_timer()
 print('Time: ', stop - start)

@@ -13,5 +13,9 @@ plt.imshow(test)
 # plt.show()
 tif = TIFF.open('/root/Documents/mj/python/img.tif', mode='r')
 image = tif.read_image()
-for image in tif.iter_images():
-    print(image[0][0])
+# l = image[:,:,:]
+l = image
+plt.imshow(l)
+plt.show()
+# for image in tif.iter_images():
+#     print(image[0][0][0])

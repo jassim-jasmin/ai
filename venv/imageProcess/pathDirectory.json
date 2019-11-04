@@ -1,6 +1,13 @@
 {
   "ubuntu":
   {
-    "testImagePath": "/root/Documents/mj/python/img.tif"
+    "testImagePath": "/root/Documents/mj/python/testtif/2018-004745.tif",
+    "contoursLinedImage": "/root/Documents/mj/python/contourImage.tif",
+    "edgeImagePath": "/root/Documents/mj/python/edgeImage.tif",
+    "testImagePath2": "/root/Documents/mj/python/test/aa.tif",
+    "testImageDirectory": "/root/Documents/mj/python/testtif",
+    "testImagePath3": "/root/Documents/mj/python/testtif/2018-004744.tif",
+    "testEdgeImageDirectory": "/root/Documents/mj/python/process/edges",
+    "testConcatImageDirectory": "/root/Documents/mj/python/process/concatImages"
   }
 }

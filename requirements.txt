@@ -1,5 +1,5 @@
 fuzzywuzzy==0.17.0
 opencv-python==4.1.0.25
-tensorflow==1.7.0
+tensorflow==1.15.2
 tensorflow-hub
 bert-tensorflow

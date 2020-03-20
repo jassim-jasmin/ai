@@ -19,7 +19,7 @@ def train():
 
     predidtor = ktrain.get_predictor(learner.model, preproc)
 
-    predidtor.save('./model/aclimdb')
+    predidtor.save('/root/mj/python/ai/model_learn/aclimdb')
 
     return True
 

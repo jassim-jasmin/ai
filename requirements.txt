@@ -1,6 +1,6 @@
-fuzzywuzzy==0.17.0
-opencv-python==4.1.0.25
-tensorflow==2.0
+fuzzywuzzy
+opencv-python
+tensorflow
 tensorflow-hub
 #bert-for-tf2
 sentencepiece

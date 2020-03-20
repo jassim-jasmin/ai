@@ -1,0 +1,15 @@
+fuzzywuzzy==0.17.0
+opencv-python==4.1.0.25
+tensorflow==2.0
+tensorflow-hub
+#bert-for-tf2
+sentencepiece
+nltk
+textblob
+#tf-hub-nightly
+sklearn
+pandas
+bert-tensorflow
+absl-py
+ktrain
+

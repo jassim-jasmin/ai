@@ -1,0 +1,11 @@
+class AdamWeightDecayOptimizer(tf.compat.v1.train.Optimizer)
+flags = tf.compat.v1.flags
+FLAGS = tf.compat.v1.flags.Flag
+tf.flags -> flags
+
+tf.gfile -> tf.compat.v1.gfile
+
+get_or_create_global_step -> tf.compat.v1.train.get_or_create_global_step
+
+metrics.accuracy -> tf.compat.v1.metrics.accuracy
+https://www.tensorflow.org/api_docs/python/tf/compat/v1/variable_scope

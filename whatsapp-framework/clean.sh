@@ -1,1 +1,0 @@
-find / -name 'axolotl.db' -exec rm -rf {} \;

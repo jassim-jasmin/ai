@@ -59,33 +59,62 @@ encoder = Model(inputs=autoencoder.input,
 	outputs=autoencoder.get_layer("encoded").output)
 # quantify the contents of our input testing images using the encoder
 print("[INFO] encoding testing images...")
-features = encoder.predict(testX)
 
-# randomly sample a set of testing query image indexes
-queryIdxs = list(range(0, testX.shape[0]))
-queryIdxs = np.random.choice(queryIdxs, size=args["sample"],
-	replace=False)
 
-# loop over the testing indexes
-for i in queryIdxs:
-	# take the features for the current image, find all similar
-	# images in our dataset, and then initialize our list of result
-	# images
-	queryFeatures = features[i]
-	results = perform_search(queryFeatures, index, maxResults=225)
-	images = []
-	# loop over the results
-	for (d, j) in results:
-		# grab the result image, convert it back to the range
-		# [0, 255], and then update the images list
-		image = (trainX[j] * 255).astype("uint8")
-		image = np.dstack([image] * 3)
-		images.append(image)
-	# display the query image
-	query = (testX[i] * 255).astype("uint8")
-	cv2.imshow("Query", query)
-	# build a montage from the results and display it
-	montage = build_montages(images, (28, 28), (15, 15))[0]
-	cv2.imshow("Results", montage)
-	cv2.waitKey(0)
+im = cv2.imread('input/5.png')
+
+img = np.expand_dims(im, axis=-1)
+img = trainX.astype("float32") / 255.0
+
+features = encoder.predict(img)
+
+
+results = perform_search(features, index, maxResults=10)
+
+images = []
+# loop over the results
+for (d, j) in results:
+	# grab the result image, convert it back to the range
+	# [0, 255], and then update the images list
+	image = (trainX[j] * 255).astype("uint8")
+	image = np.dstack([image] * 3)
+	images.append(image)
+
+# display the query image
+cv2.imshow("Query", im)
+# build a montage from the results and display it
+montage = build_montages(images, (28, 28), (15, 15))[0]
+cv2.imshow("Results", montage)
+cv2.waitKey(0)
+
+def querySearchRandom():
+	features = encoder.predict(testX)
+
+	# randomly sample a set of testing query image indexes
+	queryIdxs = list(range(0, testX.shape[0]))
+	queryIdxs = np.random.choice(queryIdxs, size=args["sample"],
+								 replace=False)
+
+	# loop over the testing indexes
+	for i in queryIdxs:
+		# take the features for the current image, find all similar
+		# images in our dataset, and then initialize our list of result
+		# images
+		queryFeatures = features[i]
+		results = perform_search(queryFeatures, index, maxResults=225)
+		images = []
+		# loop over the results
+		for (d, j) in results:
+			# grab the result image, convert it back to the range
+			# [0, 255], and then update the images list
+			image = (trainX[j] * 255).astype("uint8")
+			image = np.dstack([image] * 3)
+			images.append(image)
+		# display the query image
+		query = (testX[i] * 255).astype("uint8")
+		cv2.imshow("Query", query)
+		# build a montage from the results and display it
+		montage = build_montages(images, (28, 28), (15, 15))[0]
+		cv2.imshow("Results", montage)
+		cv2.waitKey(0)
 

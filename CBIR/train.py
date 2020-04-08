@@ -17,7 +17,7 @@ import argparse
 import cv2
 
 
-def visualize_predictions(decoded, gt, samples=10):
+def visualize_predictions(decoded, gt, samples=1):
     # initialize our list of output images
     outputs = None
     # loop over our number of output samples
@@ -57,6 +57,9 @@ BS = 32
 print("[INFO] loading MNIST dataset...")
 ((trainX, _), (testX, _)) = mnist.load_data()
 
+trainX = trainX[:10][:][:]
+testX = testX[:10][:][:]
+
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
 trainX = np.expand_dims(trainX, axis=-1)
@@ -66,7 +69,7 @@ testX = testX.astype("float32") / 255.0
 
 # construct our convolutional autoencoder
 print("[INFO] building autoencoder...")
-(encoder, decoder, autoencoder) = ConvAutoencoder.build(28, 28, 1)
+autoencoder = ConvAutoencoder.build(28, 28, 1)
 # opt = Adam(lr=INIT_LR)
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 autoencoder.compile(loss="mse", optimizer=opt)

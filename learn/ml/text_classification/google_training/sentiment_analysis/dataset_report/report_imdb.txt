@@ -1,0 +1,30 @@
+
+        Training set
+        ############
+        Number of class: 2
+        Number of words per sample: 172.0
+        Number of samples: 25000
+        Clss wise Report:
+			0: 12500
+			1: 12500
+
+        Test test
+        #########
+        Number of class: 2
+        Number of words per sample: 172.0
+        Number of samples: 25000
+        Clss wise Report:
+			0: 12500
+			1: 12500
+
+        ====================
+        Total record: 50000
+        ====================
+
+        Summary
+        ^^^^^^^
+        Tokenize the text as n-grams and use a simple multi-layer perceptron (MLP) model to classify them
+			a. Split the samples into word n-grams; convert the n-grams into vectors.
+			b. Score the importance of the vectors and then select the top 20K using the scores.
+			c. Build an MLP model.
+        

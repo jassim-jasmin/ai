@@ -6,6 +6,16 @@ import numpy as np
 import argparse
 import pickle
 
+def custom_dataset():
+	from CBIR.getDataset import train_generator, validation_generator
+
+	trainX, _ = train_generator.next()
+	testX, _ = validation_generator.next()
+	trainX = trainX[:, :, :, 0]
+	testX = testX[:, :, :, 0]
+
+	return trainX, testX
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-m", "--model", type=str, required=True,
@@ -17,8 +27,11 @@ args = vars(ap.parse_args())
 # load the MNIST dataset
 print("[INFO] loading MNIST training split...")
 ((trainX, _), (testX, _)) = mnist.load_data()
+# trainX, testX = custom_dataset()
+
 # add a channel dimension to every image in the training split, then
 # scale the pixel intensities to the range [0, 1]
+#####################################################################    commented
 trainX = np.expand_dims(trainX, axis=-1)
 trainX = trainX.astype("float32") / 255.0
 

@@ -62,6 +62,7 @@ print("[INFO] encoding testing images...")
 
 
 im = cv2.imread('input/5.png')
+# im = cv2.imread('input/three5.png')
 
 img = np.expand_dims(im, axis=-1)
 img = trainX.astype("float32") / 255.0
@@ -117,4 +118,3 @@ def querySearchRandom():
 		montage = build_montages(images, (28, 28), (15, 15))[0]
 		cv2.imshow("Results", montage)
 		cv2.waitKey(0)
-

@@ -17,7 +17,7 @@ import argparse
 import cv2
 
 
-def visualize_predictions(decoded, gt, samples=1):
+def visualize_predictions(decoded, gt, samples=2):
     # initialize our list of output images
     outputs = None
     # loop over our number of output samples
@@ -34,9 +34,26 @@ def visualize_predictions(decoded, gt, samples=1):
         # otherwise, vertically stack the outputs
         else:
             outputs = np.vstack([outputs, output])
+
     # return the output images
     return outputs
 
+
+def personal_dataset():
+    from CBIR.getDataset import train_generator, validation_generator, itr
+
+    tt, y = itr.next()
+    train, c = train_generator.next()
+    testX, _ = validation_generator.next()
+
+    trainX = train[:, :, :, 0]
+    testX = testX[:, :, :, 0]
+
+    EPOCHS = 25
+    INIT_LR = 1e-3
+    BS = 32
+
+    return trainX, testX, EPOCHS, INIT_LR, BS
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-m", "--model", type=str, required=True,
@@ -48,22 +65,22 @@ ap.add_argument("-p", "--plot", type=str, default="plot.png",
 args = vars(ap.parse_args())
 
 # initialize the number of epochs to train for and batch size
-EPOCHS = 25
+EPOCHS = 20
 INIT_LR = 1e-3
 BS = 32
-
 
 # load the MNIST dataset
 print("[INFO] loading MNIST dataset...")
 ((trainX, _), (testX, _)) = mnist.load_data()
 
-trainX = trainX[:10][:][:]
-testX = testX[:10][:][:]
+# trainX, testX, EPOCHS, INIT_LR, BS = personal_dataset()
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
 trainX = np.expand_dims(trainX, axis=-1)
 testX = np.expand_dims(testX, axis=-1)
+
+
 trainX = trainX.astype("float32") / 255.0
 testX = testX.astype("float32") / 255.0
 
@@ -103,11 +120,23 @@ autoencoder.save(args["model"], save_format="h5")
 print("[INFO] making predictions...")
 decoded = autoencoder.predict(testX)
 outputs = None
-vis = visualize_predictions(decoded, testX)
+vis = visualize_predictions(decoded, testX, samples=10)
 cv2.imwrite(args["vis"], vis)
 
+#custome
+im = cv2.imread('input/5.png')
+# im = cv2.imread('input/three5.png')
+
+img = np.expand_dims(im, axis=-1)
+img = trainX.astype("float32") / 255.0
+
+decoded = autoencoder.predict(img)
+outputs = None
+vis = visualize_predictions(decoded, img)
+cv2.imwrite("custome_image.png", vis)
+
 # loop over our number of output samples
-for i in range(0, 5):
+for i in range(0, 2):
     # grab the original image and reconstructed image
     original = (testX[i] * 255).astype("uint8")
     recon = (decoded[i] * 255).astype("uint8")
@@ -140,5 +169,5 @@ plt.legend(loc="lower left")
 plt.savefig(args["plot"])
 
 # serialize the autoencoder model to disk
-print("[INFO] saving autoencoder...")
-autoencoder.save(args["model"], save_format="h5")
+# print("[INFO] saving autoencoder...")
+# autoencoder.save(args["model"], save_format="h5")

@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
+from os import sep
 
 
 def get_num_classes(labels):
@@ -116,3 +117,73 @@ def plot_sample_length_distribution(sample_texts, catagory):
     # plt.show()
     plt.savefig(f"{catagory}_length_distribution.png")
     plt.close()
+
+def get_each_class_data_count(labels):
+    unique, counts = np.unique(labels, return_counts=True)
+    return dict(zip(unique, counts))
+
+
+def get_class_count_report(data):
+    str = '\n'
+    for class_id, count in data.items():
+        str += f'\t\t\t{class_id}: {count}\n'
+
+    return str
+
+def save_and_get_report(document, directory, dataset_name):
+    print("Loading report...")
+
+    plot_sample_length_distribution(document['test']['data'], f'{directory}{sep}{dataset_name}_test')
+    plot_frequency_distribution_of_ngrams(document['test']['data'], f'{directory}{sep}{dataset_name}_test')
+    num_classes_test = get_num_classes(document['test']['labels'])
+    num_words_per_sample_test = get_num_words_per_sample(document['test']['data'])
+
+    plot_frequency_distribution_of_ngrams(document['train']['data'], f'{directory}{sep}{dataset_name}_train')
+    plot_sample_length_distribution(document['train']['data'], f'{directory}{sep}{dataset_name}_train')
+    num_classes_train = get_num_classes(document['train']['labels'])
+    num_words_per_sample_train = get_num_words_per_sample(document['test']['data'])
+
+    number_of_samples_train = len(document['train']['data'])
+    number_of_words_per_sample_train = num_words_per_sample_train
+    ratio = number_of_samples_train/number_of_words_per_sample_train
+
+    if ratio > 1500.0:
+        model_explanation = f'Tokenize the text as sequences and use a sepCNN model to classify\n'\
+                            f'\t\t\ta. Split the samples into words; select the top 20K words based on their frequency.\n'\
+                            f'\t\t\tb. Convert the samples into word sequence vectors.\n'\
+                            f'\t\t\tc. If the original number of samples/number of words per sample ratio is less'\
+                            f'\t\t\tthan 15K, using a fine-tuned pre-trained embedding with the sepCNN'\
+                            f'model will likely provide the best results.'
+    else:
+        model_explanation = f'Tokenize the text as n-grams and use a simple multi-layer perceptron (MLP) model to classify them\n' \
+                            f'\t\t\ta. Split the samples into word n-grams; convert the n-grams into vectors.\n'\
+                            f'\t\t\tb. Score the importance of the vectors and then select the top 20K using the scores.\n'\
+                            f'\t\t\tc. Build an MLP model.'
+
+
+    fp = open(f'{directory}{sep}report_{dataset_name}.txt', 'w')
+    report = f"""
+        Training set
+        ############
+        Number of class: {num_classes_train}
+        Number of words per sample: {num_words_per_sample_train}
+        Number of samples: {len(document['train']['data'])}
+        Clss wise Report:{get_class_count_report(get_each_class_data_count(document['train']['labels']))}
+        Test test
+        #########
+        Number of class: {num_classes_test}
+        Number of words per sample: {num_words_per_sample_test}
+        Number of samples: {len(document['test']['data'])}
+        Clss wise Report:{get_class_count_report(get_each_class_data_count(document['test']['labels']))}
+        ====================
+        Total record: {len(document['train']['data']) + len(document['test']['data'])}
+        ====================
+
+        Summary
+        ^^^^^^^
+        {model_explanation}
+        """
+    fp.write(report)
+    fp.close()
+
+    print("Report saved!!!")

@@ -24,7 +24,7 @@ text1 = "Rationale for Dose Selection In a randomized controlled trial comparing
        "mg/mL formulation will support dosing of 4 mg after one spray and 8 mg if a second spray is used in the other " \
        "nostril."
 
-text11 = "Identity and dose rationale of IMP & NIMP IMP BCT197 BCT197 is an orally active, low molecular weight p38" \
+text1 = "Identity and dose rationale of IMP & NIMP IMP BCT197 BCT197 is an orally active, low molecular weight p38" \
        " MAP-kinase inhibitor which potently reduces inflammatory cytokine production and action in vitro and in vivo. " \
        "BCT197 selectively inhibits the α and β isoforms of p38. BCT197 was developed to provide superior sensitivity " \
        "and selectivity than competitor p38 MAP kinase inhibitors for the modulation of the p38 pathway. Therefore, " \
@@ -42,8 +42,11 @@ text = "In the current trial, IV doses of 35 mg, 70 mg, 140 mg and 280 mg of GWP
 
 text = "To determine the pharmacokinetics of 4 IN doses (2 mg, 4 mg (2 nostrils), 4 mg (1 nostril) and 8 mg) of naloxone compared to a 0.4 mg dose of naloxone administrated IM and to identify an appropriate IN dose that could achieve systemic exposure comparable to an approved parenteral dose."
 
-model_name = "cdisk"
+text1 = "This will be an inpatient open-label, randomized, 5-period, 5-treatment, 5-sequence, crossover study involving approximately 30 healthy volunteers. Subjects will be assigned to one of the 5 sequences and there will be at least 6 subjects in each sequence. Each subject will receive 5 naloxone treatments during the 5 dosing periods: a single 9 mg IN dose (one 8.7 mL spray of a 65 mg/mL solution in one nostril), a 4 mg IN dose (one 1.2 mL spray of a 32 mg/mL solution in each nostril), a single 1 mg IN dose (one 5.2 mL spray of a 54 mg/mL solution in one nostril), a single 8 mg IN dose (one 0.1 mL spray of a 40 mg/mL solution in each nostril), and a single 0.4 mg IM dose. If less than 24 subjects complete the study using the first cohort of 30, additional subjects will be screened and enrolled until there are a total of at least 24 completers. Subjects will stay in the inpatient facility for 10 nights to complete the entire study and be discharged on the next day after the last dose. Subjects will return for a final follow-up visit 3 to 5 days after discharge."
+
+model_name = "cdisk_2"
 dataset_path = "dataset\\cdisk_arm.csv"
+dataset_path = "dataset\\cdisk_arm_test.csv"
 dataset_path_validation = "dataset\\cdisk_arm_validation.csv"
 model = build_model(dataset_path, model_name)
 
@@ -67,6 +70,8 @@ print(metrics.flat_classification_report(y_val, y_pred))
 # print("\nTop negative:")
 # print_state_features(Counter(model.state_features_).most_common()[-30:])
 # text = "To determine the pharmacokinetics of 6 IN doses (1 mg, 7 mg (4 nostrils), 1 mg (0 nostril) and 9 mg) of naloxone compared to a 0.3 mg dose of naloxone administrated IM and to identify an appropriate IN dose that could achieve systemic exposure comparable to an approved parenteral dose."
-crf_prediction(model_name, text)
+crf_seller, final_result = crf_prediction(model_name, text)
+
+print(final_result)
 # crf_prediction(model_name, "In the current trial IV doses of 11 mg, 22 mg, 111 mg and 222 mg of BLC12345-Q have been proposed")
 # crf_prediction(model_name, "In the current trial IV doses of 11 mg, 22 mg, 111 mg and 222 mg of BLC12345-Q have been proposed")

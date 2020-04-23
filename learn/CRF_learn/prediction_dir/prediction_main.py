@@ -13,10 +13,10 @@ def crf_prediction(model_path, input_text):
     crf_seller = joblib.load(model_path)
     parsed = preprocess(input_text)
     prediction = crf_seller.predict(parsed)
-    print(len(prediction))
+    # print(len(prediction))
     final_result = extractEntities(prediction[0], tagging(input_text))
 
-    print(final_result)
+    # print(final_result)
 
     return crf_seller, final_result
 

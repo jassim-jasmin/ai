@@ -31,5 +31,5 @@ def get_location(text, search_text):
 
     return l, r
 
-text = "To determine the pharmacokinetics of 1 IN doses (1 mg, 2 mg (2 nostrils), 1 mg (2 nostril) and 9 mg) of naloxone compared to a 0.5 mg dose of naloxone administrated IM and to identify an appropriate IN dose that could achieve systemic exposure comparable to an approved parenteral dose."
-get_location(text, "1 IN doses (1 mg, 2 mg (2 nostrils), 1 mg (2 nostril) and 9 mg) of naloxone compared to a 0.5 mg")
+text = "Period 1 All subjects will receive a single dose of BCT197 14 mg (2 x 7mg capsules) in a fasting state. Period 2 All subjects will receive 3 daily doses of azithromycin 500 mg film coated tablet and a single dose of BCT197 14 mg (2 x 7mg capsules) (24 hours after the first dose of azithromycin) ina fasting state."
+get_location(text, "azithromycin 500 mg film coated tablet and a single dose of BCT197 14 mg")

@@ -44,6 +44,11 @@ text = "To determine the pharmacokinetics of 4 IN doses (2 mg, 4 mg (2 nostrils)
 
 text1 = "This will be an inpatient open-label, randomized, 5-period, 5-treatment, 5-sequence, crossover study involving approximately 30 healthy volunteers. Subjects will be assigned to one of the 5 sequences and there will be at least 6 subjects in each sequence. Each subject will receive 5 naloxone treatments during the 5 dosing periods: a single 9 mg IN dose (one 8.7 mL spray of a 65 mg/mL solution in one nostril), a 4 mg IN dose (one 1.2 mL spray of a 32 mg/mL solution in each nostril), a single 1 mg IN dose (one 5.2 mL spray of a 54 mg/mL solution in one nostril), a single 8 mg IN dose (one 0.1 mL spray of a 40 mg/mL solution in each nostril), and a single 0.4 mg IM dose. If less than 24 subjects complete the study using the first cohort of 30, additional subjects will be screened and enrolled until there are a total of at least 24 completers. Subjects will stay in the inpatient facility for 10 nights to complete the entire study and be discharged on the next day after the last dose. Subjects will return for a final follow-up visit 3 to 5 days after discharge."
 
+# fp = open("C:\\Users\\MOHAMMED JASIM\\PycharmProjects\\ai\\dataset\\p92.txt", "r", encoding="utf8")
+fp = open("C:\\Users\\MOHAMMED JASIM\\PycharmProjects\\ai\\dataset\\p27.txt", "r", encoding="utf8")
+text = fp.read()
+fp.close()
+
 model_name = "cdisk_2"
 dataset_path = "dataset\\cdisk_arm.csv"
 dataset_path = "dataset\\cdisk_arm_test.csv"
@@ -55,14 +60,11 @@ x_val, y_val = build_crfsuit_dataset(dataset_path)
 y_pred = model.predict(x_val)
 
 print(metrics.flat_classification_report(y_val, y_pred))
-#
 # print("Top likely transitions:")
 # print_transitions(Counter(model.transition_features_).most_common(20))
 #
 # print("\nTop unlikely transitions:")
 # print_transitions(Counter(model.transition_features_).most_common()[-20:])
-#
-
 #
 # print("\nTop positive:")
 # print_state_features(Counter(model.state_features_).most_common(30))

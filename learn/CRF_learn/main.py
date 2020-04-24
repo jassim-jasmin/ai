@@ -8,7 +8,9 @@ def protocol(prdiction):
     arm_attribute(prdiction)
 
 
-fp = open("learn\ocr\\data\\convert_data.txt", "r")
+# fp = open("learn\ocr\\data\\convert_data.txt", "r")
+# fp = open("C:\\Users\MOHAMMED JASIM\\PycharmProjects\\ai\\dataset\\p92.txt", "r", encoding="utf8")
+fp = open("C:\\Users\\MOHAMMED JASIM\\PycharmProjects\\ai\\dataset\\p27.txt", "r", encoding="utf8")
 
 data = fp.read()
 fp.close()

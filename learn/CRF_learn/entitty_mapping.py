@@ -5,7 +5,7 @@ combination = 'combination'
 
 """prediction label mapping"""
 logic_mapping = {
-    "mark_3_na": "nalaxone_format_1",
+    "mark_3_na": "mg_portion_selector",
     "mark_4": "arm_part_discover"
 }
 
@@ -61,8 +61,8 @@ def nalaxone_arm_spec_rule(data, protocol_values):
             protocol_values[group_value[1]] = protocol_values_data
 
 
-def nalaxone_format_1(data, protocol_values):
-    print("nalaxone format 1")
+def mg_portion_selector(data, protocol_values):
+    print("mg_portion_selector")
     print(data)
     # nalaxone_arm_spec_rule(data[])
 
@@ -93,8 +93,10 @@ def nalaxone_specifict_1(data, pattern, protocol_values):
                 if search_object:
                     if key == "first_part":
                         arm_part_dic[key] = "(" + search_object.group(0)
+
                     elif key == "second_part":
                         arm_part_dic[key] = search_object.group(0) + ")"
+
                     else:
                         arm_part_dic[key] = search_object.group(0)
 
@@ -188,8 +190,6 @@ def arm_design(data, armcd):
 
 
     if mg_values in data:
-        prediction_result = data[mg_values]
-
         for each_possible_values in data[mg_values]:
             # real_value = validation(each_possible_values, "arm_design")
             real_values = each_possible_values
@@ -200,12 +200,13 @@ def arm_design(data, armcd):
 
                 if len(speicifier) == 0:
                     specifier_itrator = False
+
                 else:
                     specifier_itrator = 1
 
                 for each_element in real_values:
                     if len(armcd) > i:
-                        if armcd[i].isalpha(): # problem
+                        if armcd[i].isalpha():
                             arm += f"{each_element} {get_arm_part(specifier_itrator, each_element, speicifier)}"
 
                             specifier_itrator += 1
@@ -226,12 +227,17 @@ def arm_design(data, armcd):
 
                         break
 
+                if len(armcd)>i: # If armcd not match  with predicted mg_valuse, then it should not be added
+                    arm = ''
+
                 if arm != '':
                     arm_values.append(arm)
+
             else:
                 print("no match")
 
-    data["arm"] = arm_values
+    if arm_values:
+        data["arm"] = arm_values
 
 def arm_attribute(data):
     print("arm input: ", data)

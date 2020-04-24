@@ -14,8 +14,11 @@ cursor.execute(sql)
 data = cursor.fetchall()
 filePath = "dataset\\d1_unorder.csv"
 # Create the csv file
+
+import pandas as pd
+
 with open(filePath, 'w', newline='') as f_handle:
-    writer = csv.writer(f_handle)
+    writer = csv.writer(f_handle,)
     # Add the header/column names
     header = ['data', 'start', 'end', 'label']
     header = ['data', 'word', 'label']
@@ -23,7 +26,10 @@ with open(filePath, 'w', newline='') as f_handle:
     # Iterate over `data`  and  write to the csv file
     try:
         insert_row = []
+        data_value = []
+        insert = []
         for row, row1, row2, lable in data:
+            insert_row = []
             insert_row.append(row)
             left = int(row1)
             right = int(row2)
@@ -31,6 +37,7 @@ with open(filePath, 'w', newline='') as f_handle:
             insert_row.append(lable)
 
             writer.writerow(insert_row)
+        # pd.DataFrame({'data':insert_row[0], 'word':insert_row[1], 'label':insert_row[2]})
     except Exception as e:
         print('error :', e)
         print(row)

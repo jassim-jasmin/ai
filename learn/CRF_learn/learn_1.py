@@ -47,6 +47,7 @@ text1 = "This will be an inpatient open-label, randomized, 5-period, 5-treatment
 # fp = open("C:\\Users\\MOHAMMED JASIM\\PycharmProjects\\ai\\dataset\\p92.txt", "r", encoding="utf8")
 fp = open("C:\\Users\\MOHAMMED JASIM\\PycharmProjects\\ai\\dataset\\p27.txt", "r", encoding="utf8")
 text = fp.read()
+text = text.replace("\n", " ")
 fp.close()
 
 model_name = "cdisk_2"
@@ -72,8 +73,12 @@ print(metrics.flat_classification_report(y_val, y_pred))
 # print("\nTop negative:")
 # print_state_features(Counter(model.state_features_).most_common()[-30:])
 # text = "To determine the pharmacokinetics of 6 IN doses (1 mg, 7 mg (4 nostrils), 1 mg (0 nostril) and 9 mg) of naloxone compared to a 0.3 mg dose of naloxone administrated IM and to identify an appropriate IN dose that could achieve systemic exposure comparable to an approved parenteral dose."
+# text = "In Part B, the absolute bioavailability of CBD will be determined by comparing an appropriate IV dose of GWP42003-P with a single oral dose of 1500 mg GWP42003-P. The IV dose will be selected based on the safety and tolerability of doses administered in Part A. In addition, the PK of CBD/THC in Part A will be taken into consideration and the lowest dose commensurate with adequate plasma levels of CBD/THC will be selected. Dependent on the PK data from each cohort in Part A, Part B may be performed in parallel with Part A."
 crf_seller, final_result = crf_prediction(model_name, text)
 
 print(final_result)
 # crf_prediction(model_name, "In the current trial IV doses of 11 mg, 22 mg, 111 mg and 222 mg of BLC12345-Q have been proposed")
 # crf_prediction(model_name, "In the current trial IV doses of 11 mg, 22 mg, 111 mg and 222 mg of BLC12345-Q have been proposed")
+
+for key, values in final_result.items():
+    print(key)

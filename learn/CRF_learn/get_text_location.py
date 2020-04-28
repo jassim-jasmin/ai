@@ -31,5 +31,5 @@ def get_location(text, search_text):
 
     return l, r
 
-text = "Period 1 All subjects will receive a single dose of BCT197 14 mg (2 x 7mg capsules) in a fasting state. Period 2 All subjects will receive 3 daily doses of azithromycin 500 mg film coated tablet and a single dose of BCT197 14 mg (2 x 7mg capsules) (24 hours after the first dose of azithromycin) ina fasting state."
-get_location(text, "azithromycin 500 mg film coated tablet and a single dose of BCT197 14 mg")
+text = "In Part B, the absolute bioavailability of CBD will be determined by comparing an appropriate IV dose of GWP42003-P with a single oral dose of 1500 mg GWP42003-P. The IV dose will be selected based on the safety and tolerability of doses administered in Part A. In addition, the PK of CBD/THC in Part A will be taken into consideration and the lowest dose commensurate with adequate plasma levels of CBD/THC will be selected. Dependent on the PK data from each cohort in Part A, Part B may be performed in parallel with Part A."
+get_location(text, "1500 mg GWP42003-P")

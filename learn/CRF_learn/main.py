@@ -28,5 +28,5 @@
 # protocol(final_result)
 
 from learn.CRF_learn.cdisc.t_domain_automation import main
-model_name = "cdisk_2"
+model_name = "nalaxone"
 main(model_name)

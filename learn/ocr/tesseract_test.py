@@ -63,10 +63,10 @@ def test():
 #     data_block = pytesseract.image_to_data(crop_image)
 #     print(data_block)
 
-# pdf_path = "C:\\Users\\MOHAMMED JASIM\\Documents\mj\\dataset\\p1.pdf"
+pdf_path = "C:\\Users\\MOHAMMED JASIM\\Documents\mj\\dataset\\p1.pdf"
 # pdf_to_text_path = "data\\convert_data.txt"
 
-pdf_path = "C:\\Users\\MOHAMMED JASIM\\\Documents\\mj\\project\cdisk\\op0992\\OP0992.pdf"
+# pdf_path = "C:\\Users\\MOHAMMED JASIM\\\Documents\\mj\\project\cdisk\\op0992\\OP0992.pdf"
 pdf_to_text_path = "data\\op0222.txt"
 
 data = pdf_to_text(pdf_path)

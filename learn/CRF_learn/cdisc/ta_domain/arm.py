@@ -103,7 +103,7 @@ def arm_design(data, armcd):
         data["arm"] = arm_values
 
 def generate_arm(data, armcd):
-    print("arm input: ", data)
+    # print("arm input: ", data)
     protocol_values = {}
 
     for key, mapping in label_mapping.items():
@@ -112,6 +112,6 @@ def generate_arm(data, armcd):
             # the function call happens and values are stored in protocol_values
 
     arm_design(protocol_values, armcd)
-    print("final result", protocol_values)
+    # print("final result", protocol_values)
 
     return protocol_values

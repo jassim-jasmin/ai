@@ -74,16 +74,16 @@ def arm_part_2(data, protocol_values):
                     eval(group_value[3])(update_value, protocol_values)
 
 def mg_portion_selector(data, protocol_values):
-    print("mg_portion_selector")
-    print(data)
+    # print("mg_portion_selector")
+    # print(data)
     # nalaxone_arm_spec_rule(data[])
 
     for each_prediction in data:
         nalaxone_arm_spec_rule(each_prediction, protocol_values)
 
 def arm_part_discover(data, protocol_values):
-    print("arm_part_discover")
-    print(data)
+    # print("arm_part_discover")
+    # print(data)
 
     for each_data in data:
         for pattern, function_name in arm_part_rule.items():

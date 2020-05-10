@@ -2,8 +2,19 @@ import sklearn_crfsuite
 import joblib
 from os import sep
 from ml.ner.crf.text_process import build_crfsuit_dataset
+import joblib
 
-def get_model(X_train, Y_train, model_name):
+def get_model(model_name):
+    try:
+        model_path = f"model{sep}{model_name}.pkl"
+
+        return joblib.load(model_path)
+
+    except FileNotFoundError as e:
+        print(model_path)
+        print("error in get_model", e)
+
+def train_model(X_train, Y_train, model_name):
     print("begin training")
     crf = sklearn_crfsuite.CRF(
         algorithm='lbfgs',
@@ -22,7 +33,7 @@ def get_model(X_train, Y_train, model_name):
 def build_model_from_csv(dataset_path, model_name):
     print("downloading dataset")
     X_train, Y_train = build_crfsuit_dataset.from_csv(dataset_path)
-    crf = get_model(X_train, Y_train, model_name)
+    crf = train_model(X_train, Y_train, model_name)
     print("completed")
 
     return crf

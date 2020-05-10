@@ -1,6 +1,6 @@
 from os import sep
 import joblib
-from ml.ner.crf.text_process.common import tagging, features, get_entity, sent2features
+from ml.ner.crf.text_process.common import tagging, features, get_entity
 
 def get_trained_model(model_path):
     try:

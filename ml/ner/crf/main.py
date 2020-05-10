@@ -1,4 +1,4 @@
-from ml.ner.crf.train import build_model
+from ml.ner.crf.train import build_model_from_csv
 from ml.ner.crf.prediction import get_ner
 from os import sep
 
@@ -10,7 +10,7 @@ def test():
     input_data = fp.read()
     fp.close()
 
-    build_model(dataset_path, model_name)
+    build_model_from_csv(dataset_path, model_name)
     ner_data = get_ner(model_path, input_data)
 
     print(ner_data)

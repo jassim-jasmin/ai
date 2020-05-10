@@ -68,8 +68,10 @@ def main(protocol_name):
     if ta_values:
         final_data["ta_variables"] = ta_values
 
-    elif ta_values:
+    elif tv_values:
         final_data["tv_variables"] = tv_values
+
+    print(final_data)
 
     return ta_values
 

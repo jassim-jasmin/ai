@@ -62,7 +62,7 @@ rs = RandomizedSearchCV(crf, params_space,
                         n_jobs=-1,
                         n_iter=50,
                         scoring=f1_scorer)
-rs.fit(X_train, y_train)
+# rs.fit(X_train, y_train)
 # save_pickle(rs, "crf_randomized_search_cv_t_1")
 rs = get_model("crf_randomized_search_cv_t_1")
 # crf = rs.best_estimator_
@@ -71,9 +71,13 @@ print('best CV score:', rs.best_score_)
 print('model size: {:0.2f}M'.format(rs.best_estimator_.size_ / 1000000))
 
 # Check parameter space
-_x = [s.parameters['c1'] for s in rs.grid_scores_]
-_y = [s.parameters['c2'] for s in rs.grid_scores_]
-_c = [s.mean_validation_score for s in rs.grid_scores_]
+# _x = [s.parameters['c1'] for s in rs.cv_results_]
+# _y = [s.parameters['c2'] for s in rs.cv_results_]
+# _c = [s.mean_validation_score for s in rs.cv_results_]
+
+_x = rs.cv_results_["param_c1"]
+_y = rs.cv_results_["param_c2"]
+_c = rs.cv_results_["mean_test_score"]
 
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
@@ -92,3 +96,6 @@ ax.set_title("Randomized Hyperparameter Search CV Results (min={:0.3}, max={:0.3
 ax.scatter(_x, _y, c=_c, s=60, alpha=0.9, edgecolors=[0, 0, 0])
 
 print("Dark blue => {:0.4}, dark red => {:0.4}".format(min(_c), max(_c)))
+from os import sep
+
+plt.savefig(f"learn{sep}CRF_learn{sep}t_1{sep}fig.png")

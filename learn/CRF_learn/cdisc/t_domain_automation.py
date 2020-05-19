@@ -9,11 +9,16 @@ pdf_path_selector = {
     "op0927": "C:\\Users\\MOHAMMED JASIM\\Documents\\mj\\project\\cdisk\\op0927\\OP0927_GWEP1446 Protocol Final V5.0 05Dec16 Clean signed.pdf",
     "nalaxone_table_page": "16",
     "op0992_table_page": "48",
-    "op0927_table_page": "61"
+    "op0927_table_page": "61",
+    "nalaxone_text": "dataset\\nalaxone.txt"
 }
 
-def get_protocol_data(protocol_name):
-    pdf_path = pdf_path_selector[protocol_name]
+def get_protocol_data(protocol_name, text=False):
+    if text:
+        pdf_path = pdf_path_selector[protocol_name+"_text"]
+    else:
+        pdf_path = pdf_path_selector[protocol_name]
+
     fp = open(pdf_path, "r", encoding="utf8")
     data = fp.read()
     fp.close()
@@ -26,8 +31,8 @@ def get_prediction_result(model_name, data):
 
     return final_result
 
-def model_selector(option):
-    model_name = "cdisk_2"
+def model_selector(option=None):
+    model_name = "nalaxone"
 
     return model_name
 
@@ -57,7 +62,7 @@ def main(protocol_name):
     ta_values = None
     tv_values = None
 
-    # data = get_protocol_data(protocol_name)
+    data = get_protocol_data(protocol_name, text=True)
     # ta_values = ta_domain(data, protocol_name)
     tv_values = tv_domain(protocol_name)
 
@@ -73,6 +78,6 @@ def main(protocol_name):
 
     print(final_data)
 
-    return ta_values
+    final_data
 
-# main(model_selector())
+main(model_selector())

@@ -9,7 +9,7 @@ This is a general crf ner program. Mainly  `train.py` `prediction.py` `text_proc
 Trained model is saved as `pkl` file in local directory `model` with an extesion of `pkl`
 
 ####Installation
-    python setup.py install
+    pip install ner_crf
 
 ####Implementation
 #####For training

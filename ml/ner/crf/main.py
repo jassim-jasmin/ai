@@ -1,5 +1,5 @@
-from ml.ner.crf.train import build_model_from_csv
-from ml.ner.crf.prediction import get_ner
+from ner_crf import build_model_from_csv
+from ner_crf import get_ner
 from os import sep
 
 def test():

@@ -2,6 +2,9 @@ import pysolr
 
 # for creating a collection
 # solr-8.5.0:$ bin/post -c mycol1 example/exampledocs/*
+# sudo su - solr -c "/opt/solr/bin/solr create -c mycol1 -n data_driven_schema_configs" # follow
+# ref link = https://tecadmin.net/install-apache-solr-on-ubuntu/
+
 solr = pysolr.Solr('http://localhost:8983/solr/mycol1/', always_commit=True, timeout=10)
 health = solr.ping()
 print("hi", health)

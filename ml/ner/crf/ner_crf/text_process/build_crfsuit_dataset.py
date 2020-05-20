@@ -1,4 +1,4 @@
-from ml.ner.crf.text_process.common import *
+from text_process.common import sent2labels, sent2features
 from spacy.gold import GoldParse
 import spacy
 import pandas as pd

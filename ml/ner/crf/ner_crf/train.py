@@ -1,7 +1,8 @@
 import sklearn_crfsuite
 import joblib
 from os import sep
-from ml.ner.crf.text_process import build_crfsuit_dataset
+from text_process import build_crfsuit_dataset
+
 
 def get_crf(max_iterations=100, all_possible_transitions=True, c2=None, c1=None, algorithm='lbfgs'):
     return sklearn_crfsuite.CRF(

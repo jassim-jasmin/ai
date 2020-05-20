@@ -1,6 +1,6 @@
 import nltk
-from ml.ner.crf.text_process.common import sent2features, sent2labels
-from ml.ner.crf.train import train_model, get_model, get_crf, save_pickle
+from ml.ner.crf.ner_crf.text_process.common import sent2features, sent2labels
+from ml.ner.crf.ner_crf.train import get_model, get_crf
 from sklearn_crfsuite import metrics
 
 # loading train, test data

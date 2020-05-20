@@ -12,4 +12,8 @@ pandas
 bert-tensorflow
 absl-py
 ktrain
-
+falcon
+falcon-jsonify
+waitress
+hupper
+mongoengine

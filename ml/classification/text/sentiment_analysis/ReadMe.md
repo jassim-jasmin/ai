@@ -1,8 +1,8 @@
-#Text Classification
-##Sentiment analysis
+# Text Classification
+## Sentiment analysis
 Reference repo: https://github.com/google/eng-edu/blob/master/ml/guides/text_classification
 
-###Algorithm for Data Preparation and Model Building
+### Algorithm for Data Preparation and Model Building
 1. Calculate the number of samples/number of words per sample ratio.
 2. If this ratio is less than 1500, tokenize the text as n-grams and use a
 simple multi-layer perceptron (MLP) model to classify them (left branch in the
@@ -20,4 +20,4 @@ flowchart below):
 4. Measure the model performance with different hyperparameter values to find
    the best model configuration for the dataset.
    
-![Alt text](TextClassificationFlowChart.png?raw=true "TextClassificationFlowChart")
+![Alt text](/ml/classification/text/sentiment_analysis/TextClassificationFlowChart.png)

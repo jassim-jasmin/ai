@@ -20,4 +20,4 @@ flowchart below):
 4. Measure the model performance with different hyperparameter values to find
    the best model configuration for the dataset.
    
-![Alt text](/ml/classification/text/sentiment_analysis/TextClassificationFlowChart.png)
+![Text Classification Flowchart](https://github.com/jassim-jasmin/ai/blob/master/ml/classification/text/sentiment_analysis/TextClassificationFlowchart.png)

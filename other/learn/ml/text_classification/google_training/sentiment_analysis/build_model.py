@@ -1,28 +1,5 @@
-from tensorflow.python.keras import models
-from tensorflow.python.keras.layers import Dense
-from tensorflow.python.keras.layers import Dropout
-from tensorflow.python.keras.layers import Embedding
-from tensorflow.python.keras.layers import SeparableConv1D
-from tensorflow.python.keras.layers import MaxPooling1D
-from tensorflow.python.keras.layers import GlobalAveragePooling1D
+from other.learn.ml.text_classification.google_training.sentiment_analysis.main import _get_last_layer_units_and_activation
 
-
-def _get_last_layer_units_and_activation(num_classes):
-    """Gets the # units and activation function for the last network layer.
-
-    # Arguments
-        num_classes: int, number of classes.
-
-    # Returns
-        units, activation values.
-    """
-    if num_classes == 2:
-        activation = 'sigmoid'
-        units = 1
-    else:
-        activation = 'softmax'
-        units = num_classes
-    return units, activation
 
 def mlp_model(layers, units, dropout_rate, input_shape, num_classes):
     """Creates an instance of a multi-layer perceptron model.
@@ -47,6 +24,16 @@ def mlp_model(layers, units, dropout_rate, input_shape, num_classes):
 
     model.add(Dense(units=op_units, activation=op_activation))
     return model
+
+#sequence option b
+from tensorflow.python.keras import models
+
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.layers import Dropout
+from tensorflow.python.keras.layers import Embedding
+from tensorflow.python.keras.layers import SeparableConv1D
+from tensorflow.python.keras.layers import MaxPooling1D
+from tensorflow.python.keras.layers import GlobalAveragePooling1D
 
 def sepcnn_model(blocks,
                  filters,

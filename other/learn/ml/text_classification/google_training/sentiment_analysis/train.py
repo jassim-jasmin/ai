@@ -1,6 +1,6 @@
-from ml.classification.text.sentiment_analysis.train import vectorize_data, explore_data, build_model
+from other.learn.ml.text_classification.google_training.sentiment_analysis import vectorize_data, explore_data, \
+    build_model
 import tensorflow as tf
-from os import sep
 
 
 def train_ngram_model(data,
@@ -9,7 +9,7 @@ def train_ngram_model(data,
                       batch_size=128,
                       layers=2,
                       units=64,
-                      dropout_rate=0.2, model_name="default.h5"):
+                      dropout_rate=0.2):
     """Trains n-gram model on the given dataset.
 
     # Arguments
@@ -77,5 +77,13 @@ def train_ngram_model(data,
     print('Validation accuracy: {acc}, loss: {loss}'.format(
             acc=history['val_acc'][-1], loss=history['val_loss'][-1]))
 
-    model.save(f"model{sep}{model_name}")
+    # Save model.
+    model.save('IMDb_mlp_model.h5')
     return history['val_acc'][-1], history['val_loss'][-1]
+
+from other.learn.ml.text_classification.google_training.sentiment_analysis.get_dataset import load_local_csv_dataset
+path_dataset = "/dataset/nalaxone_arm_validation.csv"
+data_path = '/dataset'
+data =load_local_csv_dataset(path_dataset)
+# data = load_imdb_sentiment_analysis_dataset(data_path)
+model = train_ngram_model(data)

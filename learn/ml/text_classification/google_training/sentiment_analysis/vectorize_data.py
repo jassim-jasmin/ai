@@ -58,6 +58,9 @@ def ngram_vectorize(train_texts, train_labels, val_texts):
     # Learn vocabulary from training texts and vectorize training texts.
     x_train = vectorizer.fit_transform(train_texts)
 
+    # import pickle
+    # pickle.dump(vectorizer, open('vector.pkl', 'wb'))
+
     # Vectorize validation texts.
     x_val = vectorizer.transform(val_texts)
 
@@ -65,6 +68,9 @@ def ngram_vectorize(train_texts, train_labels, val_texts):
     selector = SelectKBest(f_classif, k=min(TOP_K, x_train.shape[1]))
     selector.fit(x_train, train_labels)
     x_train = selector.transform(x_train)
+
+    # pickle.dump(selector, open('feature.pkl', 'wb'))
+    # selector = pickle.load(open('feature.pkl', 'rb'))
     x_val = selector.transform(x_val)
 
     x_train = x_train.astype('float32')

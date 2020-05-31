@@ -1,6 +1,7 @@
 import os
 import random
 import numpy as np
+import pandas as pd
 
 def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
     """Loads the IMDb movie reviews sentiment analysis dataset.
@@ -53,3 +54,20 @@ def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
 
     return ((train_texts, np.array(train_labels)),
             (test_texts, np.array(test_labels)))
+
+def load_local_csv_dataset(path):
+    csv = pd.read_csv(path)
+    # csv['class_binary'] = []
+
+    csv.loc[csv['class'] == 'other', ['class']] = 0
+    csv.loc[csv['class'] == 'arm_nalaxone', ['class']] = 1
+
+    # print(csv)
+
+    return ((csv['data'].to_numpy(), csv['class'].to_numpy()),
+            (csv['data'].to_numpy(), csv['class'].to_numpy()))
+
+
+# path = "C:\\Users\\MOHAMMED JASIM\\PycharmProjects\\ai\dataset\\nalaxone_arm_validation.csv"
+
+# load_local_csv_dataset(path)

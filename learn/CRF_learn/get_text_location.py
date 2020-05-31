@@ -31,5 +31,5 @@ def get_location(text, search_text):
 
     return l, r
 
-text = "In Part B, the absolute bioavailability of CBD will be determined by comparing an appropriate IV dose of GWP42003-P with a single oral dose of 1500 mg GWP42003-P. The IV dose will be selected based on the safety and tolerability of doses administered in Part A. In addition, the PK of CBD/THC in Part A will be taken into consideration and the lowest dose commensurate with adequate plasma levels of CBD/THC will be selected. Dependent on the PK data from each cohort in Part A, Part B may be performed in parallel with Part A."
-get_location(text, "1500 mg GWP42003-P")
+text = "E = 0.4 mg IM Naloxone (1 mL of a 0.4 mg/mL commercial formulation)"
+get_location(text, "E = 0.4 mg IM Naloxone (1 mL of a 0.4 mg/mL commercial formulation)")

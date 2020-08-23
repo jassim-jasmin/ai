@@ -13,5 +13,5 @@ Trying to restructure the repo after each successfull expriment.
         <br>
         ml/<a href="https://github.com/jassim-jasmin/ai/tree/master/ml/ner/crf">named entity recognition</a>
         </br>
-        <a href="https://github.com/jassim-jasmin/ai/blob/master/other/learn/some_maths/conditional_probability.py">conditinal probability</a>
+        other/<a href="https://github.com/jassim-jasmin/ai/blob/master/other/learn/some_maths/conditional_probability.py">conditinal probability</a>
 </details>

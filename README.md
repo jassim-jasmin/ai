@@ -7,16 +7,6 @@ This is an experimental repo for exploring ai applications. It includes my study
 
 Trying to restructure the repo after each successfull expriment.
 
-- [ml](/ml/README.md)
-    - classification
-        - text
-            - [sentiment_analysis](/ml/classification/text/sentiment_analysis/ReadMe.md)
-    - ner
-        - [crf](/ml/ner/crf/README.md)
-
-- learn
-    - some_math
-        - [conditional_probabiity](/other/learn/some_maths/conditional_probability.py)
  <details>
   <summary><b>content</b></summary>
         <a href="https://github.com/jassim-jasmin/ai/blob/master/ml/classification/text/sentiment_analysis/ReadMe.md">sentiment analysis</a>

@@ -20,4 +20,5 @@ Trying to restructure the repo after each successfull expriment.
  <details>
   <summary><b>content</b></summary>
    [conditional_probabiity](/other/learn/some_maths/conditional_probability.py)
+    <a href="https://github.com/jassim-jasmin/ai/blob/master/other/learn/some_maths/conditional_probability.py">conditinal probability</a>
 </details>

@@ -24,7 +24,7 @@ Trying to restructure the repo after each successfull expriment.
          -  <a href="https://github.com/jassim-jasmin/ai/blob/master/ml/classification/text/sentiment_analysis/ReadMe.md">sentiment analysis</a>
     </details>
     
-    <summary><b>other</b></summary>
+   <summary><b>other</b></summary>
          -  <a href="https://github.com/jassim-jasmin/ai/blob/master/other/learn/some_maths/conditional_probability.py">conditinal probability</a>
-    </details>
+   </details>
 </details>

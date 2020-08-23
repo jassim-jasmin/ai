@@ -13,3 +13,7 @@ Trying to restructure the repo after each successfull expriment.
             - [sentiment_analysis](/ml/classification/text/sentiment_analysis/ReadMe.md)
     - ner
         - [crf](/ml/ner/crf/README.md)
+
+- learn
+    - some_math
+        - [conditional_probabiity](/other/learn/some_maths/conditional_probability.py)

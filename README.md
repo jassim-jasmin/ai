@@ -17,3 +17,7 @@ Trying to restructure the repo after each successfull expriment.
 - learn
     - some_math
         - [conditional_probabiity](/other/learn/some_maths/conditional_probability.py)
+ <details>
+  <summary><b>content</b></summary>
+   [conditional_probabiity](/other/learn/some_maths/conditional_probability.py)
+</details>

@@ -19,7 +19,6 @@ Trying to restructure the repo after each successfull expriment.
         - [conditional_probabiity](/other/learn/some_maths/conditional_probability.py)
  <details>
   <summary><b>content</b></summary>
-    <details>
         <a href="https://github.com/jassim-jasmin/ai/blob/master/ml/classification/text/sentiment_analysis/ReadMe.md">sentiment analysis</a>
         <br>
         <a href="https://github.com/jassim-jasmin/ai/blob/master/other/learn/some_maths/conditional_probability.py">conditinal probability</a>

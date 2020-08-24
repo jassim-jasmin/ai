@@ -2,12 +2,13 @@
 Experiment on conditional probability.
 """
 
+import math
 from numpy import random
 
 
-def sample_purchase_data_generator(independent: bool = True) -> dict:
+def sample_purchase_data_generator(purchase_probability: float = None) -> dict:
     """
-    :var dependent: It is for experimenting dependency of age and purchase. if set age_factor will not be considered.
+    :var purchase_probability: It is for experimenting dependency of age and purchase.
     """
     def set_group_count(group_list: list):
         """
@@ -34,11 +35,15 @@ def sample_purchase_data_generator(independent: bool = True) -> dict:
 
         for _ in range(total_person_count):
             random_individual_age = random.choice(list_of_age_group)  # a random age group
-            age_factor = float(random_individual_age) / 100.0
             age_group_dict[random_individual_age] += 1  # Incrementing the age group
             random_generated_number = random.random()
 
-            if random_generated_number < age_factor or independent:  # For getting random person to be purchased.
+            if purchase_probability:
+                age_factor = purchase_probability
+            else:
+                age_factor = float(random_individual_age) / 100.0
+
+            if random_generated_number < age_factor:  # For getting random person to be purchased.
                 total_purchase_count += 1
                 purchase_dict[random_individual_age] += 1  # Setting purchase for that individual
 
@@ -110,7 +115,7 @@ result['P(E,F)/P(F)'] = result['P(E,F)'] / result['P(F)']
 print('age list', purchased_record['age_group'])
 print('purchase list', purchased_record['purchased'])
 
-if result['P(E,F)'] == result['P(E)*P(F)']:
+if math.isclose(result['P(E,F)'], result['P(E)*P(F)'], abs_tol=1e-3):
     print("Independent, P(E,F) = P(E)*P(F)")
 
 else:

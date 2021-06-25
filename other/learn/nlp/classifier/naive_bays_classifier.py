@@ -6,7 +6,10 @@ class NaiveBayesClassifier:
     def __init__(self):
         self.model = None
 
-    def get_model(self, train_vectors, test_vectors, y_train, embedding_name = None):
+    def get_model(self, train_vectors, y_train, embedding_name=None):
+        """
+        features in decimal form
+        """
         self.model = GaussianNB()
 
         if embedding_name == 'tfidf':

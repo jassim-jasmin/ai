@@ -35,7 +35,7 @@ def spam_classifier():
         accuracy_list.append(accuracy)
 
         naive_bayes = NaiveBayesClassifier()
-        naive_bayes.get_model(train_vectors, test_vectors, y_train, name)
+        naive_bayes.get_model(train_vectors, y_train, name)
         precision, recall, accuracy = naive_bayes.get_precision_and_recall(test_vectors, y_test, name)
         precision_list.append(precision)
         recall_list.append(recall)

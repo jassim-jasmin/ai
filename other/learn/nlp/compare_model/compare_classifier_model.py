@@ -5,6 +5,8 @@ from other.learn.nlp.classifier.random_forest import RandomForestClassifierModel
 from other.learn.nlp.classifier.embeddings import Embeddings
 from other.learn.nlp.classifier.preprocessing import simple_preprocessing
 from other.learn.nlp.classifier.naive_bays_classifier import NaiveBayesClassifier
+from other.learn.nlp.classifier.linear_support_vecotor_machine import SupportLinearVectorMachine
+from other.learn.nlp.classifier.neural_network import NeuralNetwork
 
 
 def spam_classifier():
@@ -23,8 +25,8 @@ def spam_classifier():
     embeddings = []
 
     for name, values in all_embeddings.items():
-        embeddings.append(f"Random forest_{name}")
         train_vectors, test_vectors = values
+        embeddings.append(f"rfc_{name}")
         rfc_model = RandomForestClassifierModel.get_model(train_vectors, y_train)
 
         precision, recall, accuracy = RandomForestClassifierModel.get_precision_and_recall(rfc_model, test_vectors,
@@ -37,10 +39,29 @@ def spam_classifier():
         naive_bayes = NaiveBayesClassifier()
         naive_bayes.get_model(train_vectors, y_train, name)
         precision, recall, accuracy = naive_bayes.get_precision_and_recall(test_vectors, y_test, name)
+
         precision_list.append(precision)
         recall_list.append(recall)
         accuracy_list.append(accuracy)
-        embeddings.append(f"naive_bayes_{name}")
+        embeddings.append(f"nb_{name}")
+
+        lsvm = SupportLinearVectorMachine()
+        lsvm.get_model(train_vectors, y_train, name)
+        precision, recall, accuracy = lsvm.get_precision_and_recall(test_vectors, y_test, name)
+
+        precision_list.append(precision)
+        recall_list.append(recall)
+        accuracy_list.append(accuracy)
+        embeddings.append(f"lsvm_{name}")
+
+    nn = NeuralNetwork()
+    history = nn.get_model(X_train, X_test, y_train, y_test)
+    accuracy, precision_m, recall_m = nn.get_precision_and_recall(history)
+
+    precision_list.append(precision_m)
+    recall_list.append(recall_m)
+    accuracy_list.append(accuracy)
+    embeddings.append(f"NN_Embedding")
 
     return precision_list, recall_list, accuracy_list, embeddings
 
